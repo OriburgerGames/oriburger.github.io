@@ -115,6 +115,7 @@ en:
         image: assets/img/team/3.png
       - name: "Younghun Park"
         role: "Programmer"
+        image: assets/img/team/4.png
 
   contact:
     title: "Contact Us"

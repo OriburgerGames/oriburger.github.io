@@ -174,7 +174,7 @@ for (const [rel] of pages) {
 const home = html["index.md"];
 if (home) {
   check(count(home, /class="team-member"/g) === text.team.people.length, `home: ${text.team.people.length} team members rendered`);
-  check(home.includes("Younghun Park") && home.includes(">YP<"), "home: Younghun Park rendered with initials avatar");
+  check(home.includes("Younghun Park") && home.includes("assets/img/team/4.png"), "home: Younghun Park rendered with his photo");
   check(count(home, /portfolio-item/g) === portfolio.length, `home: ${portfolio.length} award cards`);
   check(count(home, /class="portfolio-modal modal fade"/g) === portfolio.length, `home: ${portfolio.length} award modals`);
   const timelineItems = count(home, /<li class="reveal/g);
