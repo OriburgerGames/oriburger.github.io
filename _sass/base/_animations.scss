@@ -1,0 +1,71 @@
+// Scroll-reveal
+//
+// `.reveal` 요소는 뷰포트에 들어올 때 assets/js/agency.js 가 `.is-visible` 을 붙인다.
+// JS가 없는 환경(html.js 미부착)에서는 처음부터 보이도록 html.js 조건을 건다.
+// 인라인 style="--reveal-delay: 120ms" 로 항목별 지연을 줄 수 있다.
+
+.reveal {
+  --reveal-delay: 0ms;
+}
+
+html.js .reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease-out, transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: var(--reveal-delay);
+  will-change: opacity, transform;
+}
+html.js .reveal.reveal-left {
+  transform: translateX(-40px);
+}
+html.js .reveal.reveal-right {
+  transform: translateX(40px);
+}
+html.js .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+// Masthead entrance
+@keyframes masthead-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+header.masthead .intro-text {
+  .intro-lead-in,
+  .intro-heading,
+  .btn {
+    animation: masthead-in 0.8s ease-out both;
+  }
+  .intro-heading {
+    animation-delay: 0.15s;
+  }
+  .btn {
+    animation-delay: 0.3s;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  header.masthead .intro-text {
+    .intro-lead-in,
+    .intro-heading,
+    .btn {
+      animation: none;
+    }
+  }
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

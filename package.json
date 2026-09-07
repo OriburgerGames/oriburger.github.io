@@ -1,0 +1,15 @@
+{
+  "name": "oriburgergames-site",
+  "private": true,
+  "description": "Local verification harness for the Oriburger Games Jekyll site (npm test)",
+  "type": "module",
+  "scripts": {
+    "test": "node scripts/verify.mjs"
+  },
+  "devDependencies": {
+    "js-yaml": "^5.4.1",
+    "liquidjs": "^10.29.0",
+    "marked": "^18.0.11",
+    "sass": "^1.104.0"
+  }
+}

@@ -1,188 +1,60 @@
-# Agency Jekyll Theme
-[![RubyGems Downloads](https://img.shields.io/gem/dt/jekyll-agency?label=gem%20downloads)](https://rubygems.org/gems/jekyll-agency)
-[![LICENSE](https://img.shields.io/badge/license-MIT-blue)](/LICENSE.txt)
-[![Tip Me via PayPal](https://img.shields.io/badge/PayPal-tip_me-green?logo=paypal)](https://www.paypal.me/raviriley)
-[![template button](https://img.shields.io/badge/Generate_theme_from_template-2ea44f)][generate]
-[![Featured on Jekyll-Themes.com](https://img.shields.io/badge/featured%20on-JekyllThemes-red.svg)](https://jekyll-themes.com/agency-jekyll-theme/)
+# Oriburger Games 홈페이지
 
-## Preview - click for live demo
+<https://oriburgergames.com> — Jekyll 기반 정적 사이트. [Agency Jekyll Theme](https://github.com/raviriley/agency-jekyll-theme)(MIT)를 바탕으로 커스터마이즈했다.
 
-[![screenshot](/screenshot.PNG)][demo-page]
+## 구조
 
-## Warning
-
-> :warning: **Notice for those using legacy Formspree contact forms:** :warning:
->
-> Email-based forms are being [phased out](https://help.formspree.io/hc/en-us/articles/360056076314) by Formspree. [#11](https://github.com/raviriley/agency-jekyll-theme/pull/11) updated this theme to use the [new Formspree structure](https://help.formspree.io/hc/en-us/articles/360017735154-How-to-prevent-spam). Click [here](https://help.formspree.io/hc/en-us/articles/360056076314) for instructions on updating your site's form.
-
-## About
-
-This is the [Agency Bootstrap theme](https://startbootstrap.com/themes/agency/), converted to a gem-based Jekyll theme with GitHub Pages support.
-
-While this has been done before, [here](https://github.com/y7kim/agency-jekyll-theme), [here](https://github.com/SotiriosVrachas/jekyll-theme-startbootstrap-agency), and [here](https://github.com/laklau/agency-jekyll-theme/), these are outdated and have not been updated or maintained for years. I built this theme from the most recent Bootstrap source.
-
-I also added a lot of new features that go beyond the original theme's capabilities:
-
-- GitHub Pages support
-- [template repo][template] to get up and running in minutes
-- contact form functionality powered by [Formspree.io](https://formspree.io)
-- multiple language support (currently English, Spanish, & German)
-- custom pages
-- 404 page
-- legal/Privacy Policy page
-- Google Analytics support
-- Markdown support
-- custom images
-- logo support (instead of just title text)
-- automatically updating copyright years
-- custom navigation bar, even without the header image(s)
-- customizable footer
-- custom accent color and dark/light colors
-- horizontal scrolling support for client section
-<!--
-- custom colors with automatic gradient generation (coming soon)
-- site title logo text font customization (coming soon)
-- horizontal scrolling support for portfolio section (coming soon)
-- about section (different from the timeline) -->
-
-The Jekyll structure of this theme includes:
-
-- `_portfolio` files - what generate the portfolio grid. YAML front matter handles all the details
-- the `page` layout allows custom pages, as seen in the legal and 404 pages
-- `sitetext.yml` enables complete customization of all site text
-- `navigation.yml` enables fully customizable navigation
-- `style.yml` enables fully customizable colors, background images, and other style-related things
-
-**If you enjoy this theme, please consider [supporting me](https://www.paypal.me/raviriley) to continue developing and maintaining it.**
-
-<div align="center">
-
-[![Support via PayPal](https://cdn.rawgit.com/twolfson/paypal-github-button/1.0.0/dist/button.svg)](https://www.paypal.me/raviriley)
-
-</div>
-
-## Installation
-
-There are three ways to install this theme:
-
-1. As a gem-based theme
-2. Use the [starter template][template] (best for GitHub Pages)
-3. As a remote theme
-
-#### 1. Gem-based Theme Installation
-
-Replace the contents of your `_config.yml` file with the sample [\_config.yml](https://raw.githubusercontent.com/raviriley/agency-jekyll-theme/master/_config.yml).
-
-Install the gem with:
-
-```sh
-$ bundle add jekyll-agency
+```
+_config.yml          사이트 설정 (url / baseurl / title / locale / og_image)
+_data/
+  sitetext.yml       화면에 표시되는 모든 텍스트 (헤더, 소개, 타임라인, 팀, 연락처, 푸터)
+  navigation.yml     상단 메뉴
+  style.yml          강조색, 배경 이미지, 웹폰트 URL
+_portfolio/          Awards 섹션 항목 (파일명 순서대로 표시)
+_layouts/            default(공통 뼈대) → home(메인) / page(404, legal)
+_includes/           섹션별 템플릿 (nav, masthead, services, portfolio_grid, modals, about, timeline, team, clients, contact, footer)
+_sass/               스타일. base/_theme.scss 가 라이트/다크 토큰, base/_animations.scss 가 등장 애니메이션
+assets/css/agency.scss  Sass 진입점 (Liquid 로 style.yml 값을 주입)
+assets/js/agency.js  스크롤/내비/애니메이션/테마 토글
+assets/img, fonts    이미지, 로컬 폰트(Wuinbold)
+scripts/verify.mjs   로컬 검증 스크립트 (npm test)
+claude/              AI 작업 요청서와 이력
 ```
 
-Or manually.
+## 콘텐츠 수정
 
-1. Add this line to your Jekyll site's `Gemfile`:
-   ```ruby
-   gem "jekyll-agency"
-   ```
-2. Then execute:
-   ```sh
-   $ bundle install
-   ```
+| 하고 싶은 것 | 수정할 곳 |
+| --- | --- |
+| 문구 바꾸기 | `_data/sitetext.yml` |
+| 팀원 추가 | `_data/sitetext.yml` → `team.people`. 사진(`assets/img/team/`)이 없으면 이니셜 아바타가 표시됨 |
+| 타임라인 항목 추가 | `_data/sitetext.yml` → `timeline.events`. `image` 또는 `icon`(Font Awesome) 지정 |
+| 수상 내역 추가 | `_portfolio/NN_이름.md` 생성, 썸네일은 `assets/img/portfolio/` (400×300) |
+| 트레일러 영상 교체 | `_data/sitetext.yml` → `services.video` (YouTube ID) |
+| 강조색 / 폰트 | `_data/style.yml`, `_sass/base/_mixins.scss` |
+| 다크 테마 색상 | `_sass/base/_theme.scss` |
 
-#### 2. Using the [Starter Template][template]
+이미지 경로는 항상 `assets/...` 로 적고, 템플릿에서 `relative_url` 필터를 거친다. `_config.yml` 의 `baseurl` 은 커스텀 도메인 루트에서 서비스되므로 반드시 빈 문자열이어야 한다(하위 경로 배포 시에만 `/repo-name`).
 
-This is the fastest and easiest way to get up and running on GitHub Pages.
-
-Simply generate your own repository by clicking the button below. Then replace the sample content with your own and configure for your needs.
-
-<div align="center">
-
-[![Use this template](https://img.shields.io/badge/Generate-Use_this_template-2ea44f?style=for-the-badge)][generate]
-
-</div>
-    
-#### 3. Remote Theme Installation
-
-Replace your `_config.yml` file with the starter [\_config.yml](https://raw.githubusercontent.com/raviriley/agency-jekyll-theme-starter/master/_config.yml).
-
-Replace your `Gemfile` with the starter [Gemfile](https://raw.githubusercontent.com/raviriley/agency-jekyll-theme-starter/master/Gemfile).
-
-Then install gems.
+## 로컬 미리보기
 
 ```sh
-$ bundle install
+bundle install
+bundle exec jekyll serve   # http://localhost:4000
 ```
 
-<!--
-## Documentation and Usage
-
-**TODO:** Write usage instructions here. Describe available layouts, includes, or assets.
-
-navheader is used only for the home page. nav is used everywhere else.
-
-Layouts:
-
-Includes:
-
--->
-
-## Contributing
-
-This project is intended to be a welcoming space for collaboration. If you have an idea, suggestion, feature request, etc., feel free to open an issue or pull request.
-
-For bug reports, follow the provided template.
-
-#### Improvements - Up for Grabs
-
-- [x] multiple language support thanks to [@rbenitezpagan](https://github.com/rbenitezpagan)
-  - [x] Spanish thanks to [@rbenitezpagan](https://github.com/rbenitezpagan)
-  - [x] German thanks to [@bkfirmen](https://github.com/bkfirmen)
-  - [ ] Chinese
-  - [ ] Arabic
-  - [ ] etc
-- [ ] customizable background coloring for each section
-
-## Development
-
-To set up your environment to develop this theme, clone this repo or your fork.
+## 검증 (Ruby 없이)
 
 ```sh
-$ git clone https://github.com/raviriley/agency-jekyll-theme.git
-$ cd agency-jekyll-theme
+npm install
+npm test
 ```
 
-Then run:
+YAML 파싱, Sass 컴파일, 페이지 렌더링, 에셋 경로 존재 여부, 콘텐츠 검사를 수행하고 렌더 결과를 `.check/` 에 남긴다.
 
-```sh
-$ bundle install
-```
+## 배포
 
-To test the theme, run this. (Using the `--trace` flag for verbose errors.)
+`master` 브랜치에 push 하면 `.github/workflows/jekyll-gh-pages.yml` 이 GitHub Pages 로 빌드·배포한다. 커스텀 도메인은 저장소 Settings → Pages 에서 관리한다.
 
-```sh
-$ bundle exec jekyll serve --trace
-```
+## 문의 폼
 
-Then open your browser at:
-
-- http://localhost:4000
-
-Add pages, documents, data, etc. like normal to test the theme's contents. As you make modifications, your site will regenerate and you should see the changes in the browser after a refresh.
-
-## License
-
-The theme is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
-
-<!--
-
-## Example Implementations
-
-- [CV Enterprises](https://cventerprises.org)
-- [Mortazavi Lab at UC Irvine](https://mortazavilab.github.io/)
-
--->
-
-[demo-page]: https://raviriley.github.io/agency-jekyll-theme-starter/
-[template]: https://github.com/raviriley/agency-jekyll-theme-starter
-[generate]: https://github.com/raviriley/agency-jekyll-theme-starter/generate
+`_config.yml` 의 `email` 로 Formspree 에 전송된다. Formspree 는 이메일 기반 엔드포인트를 단계적으로 폐지 중이므로, 폼이 동작하지 않으면 Formspree 에서 폼 ID를 발급받아 `formspree_form_path` 를 설정할 것.

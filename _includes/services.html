@@ -1,91 +1,46 @@
+{%- assign text = site.data.sitetext[site.locale] | default: site.data.sitetext -%}
+{%- assign services = text.services -%}
 <!-- Services -->
-{% if site.locale and site.locale != "" and site.locale != nil %}
-  <section class="page-section" id="{{ site.data.sitetext[site.locale].services.section | default: "services" }}">
-    <div class="container">
-	
-      <div class="row">
-        <div class="col-lg-12 text-center">
-          <h2 class="section-heading text-uppercase">{{ site.data.sitetext[site.locale].services.title | default: "Services" }}</h2>
-          {% if site.data.sitetext[site.locale].services.text %}
-		  <h3 class="section-subheading text-muted">{{ site.data.sitetext[site.locale].services.text }}</h3>
-		  {% endif %}
-        </div>
-      </div>
-
-      <!-- YouTube Embed (반복문 이전에 배치) -->
-      <div class="row mt-5 mb-5">
-        <div class="col-lg-12 text-center">
-          <div class="embed-responsive embed-responsive-16by9">
-            <iframe class="embed-responsive-item"
-                    src="https://www.youtube.com/embed/Tm9JOkwG1w4"
-                    title="YouTube video player"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen>
-            </iframe>
-          </div>
-        </div>
-      </div>
-      <!-- End YouTube Embed -->
-
-      <div class="row text-center">
-	  {% for service in site.data.sitetext[site.locale].services.list %}
-        <div class="col-md-4">
-          <span class="fa-stack fa-4x">
-            <i class="fas fa-circle fa-stack-2x text-primary"></i>
-            <i class="{{ service.icon | default: "fas fa-shopping-cart" }} fa-stack-1x fa-inverse"></i>
-          </span>
-          <h4 class="service-heading">{{ service.title | markdownify }}</h4>
-          {% if service.desc %}<div class="text-muted">{{ service.desc | markdownify }}</div>{% endif %}
-        </div>
-	  {% endfor %}
-      </div>
-	  
-    </div>
-  </section>
-{% else %}
-<section class="page-section" id="{{ site.data.sitetext.services.section | default: "services" }}">
+<section class="page-section" id="{{ services.section | default: "services" }}">
   <div class="container">
-
     <div class="row">
-      <div class="col-lg-12 text-center">
-        <h2 class="section-heading text-uppercase">{{ site.data.sitetext.services.title | default: "Services" }}</h2>
-        {% if site.data.sitetext.services.text %}
-    <h3 class="section-subheading text-muted">{{ site.data.sitetext.services.text }}</h3>
-    {% endif %}
+      <div class="col-lg-12 text-center reveal">
+        <h2 class="section-heading text-uppercase">{{ services.title | default: "Services" }}</h2>
+        {%- if services.text %}
+        <h3 class="section-subheading text-muted">{{ services.text }}</h3>
+        {%- endif %}
       </div>
     </div>
 
-    <!-- YouTube Embed (반복문 이전에 배치) -->
+    {%- if services.video %}
     <div class="row mt-5 mb-5">
-      <div class="col-lg-12 text-center">
-        <div class="embed-responsive embed-responsive-16by9">
+      <div class="col-lg-10 mx-auto reveal">
+        <div class="embed-responsive embed-responsive-16by9 video-frame">
           <iframe class="embed-responsive-item"
-                  src="https://www.youtube.com/embed/Tm9JOkwG1w4"
-                  title="YouTube video player"
-                  frameborder="0"
+                  src="https://www.youtube-nocookie.com/embed/{{ services.video }}"
+                  title="{{ site.title }} trailer"
+                  loading="lazy"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen>
-          </iframe>
+                  allowfullscreen></iframe>
         </div>
       </div>
     </div>
-    <!-- End YouTube Embed -->
-  
+    {%- endif %}
+
     <div class="row text-center">
-  {% for service in site.data.sitetext.services.list %}
-      <div class="col-md-4">
+      {%- for service in services.list %}
+      <div class="col-md-4 service reveal" style="--reveal-delay: {{ forloop.index0 | times: 120 }}ms">
         <span class="fa-stack fa-4x">
           <i class="fas fa-circle fa-stack-2x text-primary"></i>
-          <i class="{{ service.icon | default: "fas fa-shopping-cart" }} fa-stack-1x fa-inverse"></i>
+          <i class="{{ service.icon | default: "fas fa-star" }} fa-stack-1x fa-inverse"></i>
         </span>
-        <h4 class="service-heading">{{ service.title | markdownify }}</h4>
-        {% if service.desc %}<div class="text-muted">{{ service.desc | markdownify }}</div>{% endif %}
+        <h4 class="service-heading">{{ service.title }}</h4>
+        {%- if service.desc %}
+        <div class="text-muted">{{ service.desc | markdownify }}</div>
+        {%- endif %}
       </div>
-  {% endfor %}
+      {%- endfor %}
     </div>
-  
   </div>
 </section>
-{% endif %}
 <!-- End Services -->

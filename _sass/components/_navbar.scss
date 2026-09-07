@@ -1,9 +1,9 @@
 // Styling for the navbar
 #mainNav {
-  background-color: $gray-900;
+  background-color: var(--nav-bg);
+  transition: background-color 0.3s ease, padding-top 0.3s, padding-bottom 0.3s, box-shadow 0.3s;
   .navbar-toggler {
     font-size: 12px;
-    right: 0;
     padding: 13px;
     text-transform: uppercase;
     color: white;
@@ -24,11 +24,13 @@
   .navbar-nav {
     .nav-item {
       .nav-link {
+        position: relative;
         font-size: 90%;
         font-weight: 400;
         padding: 0.75em 0;
         letter-spacing: 1px;
         color: white;
+        transition: color 0.2s ease;
         @include heading-font;
         &.active,
         &:hover {
@@ -37,33 +39,101 @@
       }
     }
   }
+  .theme-toggle {
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    background: transparent;
+    color: white;
+    font-size: 15px;
+    line-height: 1;
+    cursor: pointer;
+    transition: color 0.2s ease, border-color 0.2s ease, transform 0.3s ease;
+    .fa-sun {
+      display: none;
+    }
+    &:hover {
+      color: $primary;
+      border-color: $primary;
+      transform: rotate(20deg);
+    }
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 0.2rem rgba($primary, 0.4);
+    }
+  }
 }
+
+// 다크 테마일 때는 토글에 해 아이콘을 표시
+@mixin theme-toggle-dark {
+  #mainNav .theme-toggle {
+    .fa-moon {
+      display: none;
+    }
+    .fa-sun {
+      display: inline-block;
+    }
+  }
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    @include theme-toggle-dark;
+  }
+}
+:root[data-theme="dark"] {
+  @include theme-toggle-dark;
+}
+
 @media (min-width: 992px) {
   #mainNav {
     padding-top: 25px;
     padding-bottom: 25px;
-    -webkit-transition: padding-top 0.3s, padding-bottom 0.3s;
-    -moz-transition: padding-top 0.3s, padding-bottom 0.3s;
-    transition: padding-top 0.3s, padding-bottom 0.3s;
     border: none;
     background-color: transparent;
+    // 메인 외 페이지(masthead 없음)에서는 항상 불투명 배경
+    &.navbar-solid {
+      background-color: var(--nav-bg);
+    }
     .navbar-brand {
       font-size: 1.75em;
-      -webkit-transition: all 0.3s;
-      -moz-transition: all 0.3s;
       transition: all 0.3s;
     }
     .navbar-nav {
       .nav-item {
         .nav-link {
           padding: 1.1em 1em !important;
+          &::after {
+            content: "";
+            position: absolute;
+            left: 1em;
+            right: 1em;
+            bottom: 0.75em;
+            height: 2px;
+            background-color: $primary;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.25s ease;
+          }
+          &.active::after,
+          &:hover::after {
+            transform: scaleX(1);
+          }
         }
       }
+    }
+    .theme-toggle {
+      order: 3;
+      margin-left: 1rem;
     }
     &.navbar-shrink {
       padding-top: 0;
       padding-bottom: 0;
-      background-color: $gray-900;
+      background-color: var(--nav-bg);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
       .navbar-brand {
         font-size: 1.25em;
         padding: 12px 0;

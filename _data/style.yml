@@ -1,28 +1,18 @@
-#Color Customization
-#highlight: "#54bfff"
-#white: "#FF0000"
-#black: "#000"
+# 스타일 설정. 값이 없으면 각 항목의 기본값이 쓰인다.
 
-#Image Customization
+# 강조색 (버튼, 링크, 아이콘 등). 기본 "#fed136"
+#highlight: "#54bfff"
+
+# 배경 이미지 (assets/css/agency.css 기준 상대 경로)
 header-image: "../img/header.png"
 contact-image: "../img/contact.png"
-#Font Awesome icon for portfolio grid when an item is hovered over
-#portfolio-icon: fas fa-expand-arrows-alt fa-3x #default: fas fa-plus fa-3x
 
-# Add custom fonts
+# 수상 항목 위에 마우스를 올렸을 때 표시할 Font Awesome 아이콘. 기본 "fas fa-plus fa-3x"
+#portfolio-icon: fas fa-expand-arrows-alt fa-3x
+
+# 웹폰트. 실제 font-family 매핑은 _sass/base/_mixins.scss 에 있다.
+# (Wuinbold 은 assets/fonts 의 로컬 폰트)
 fonts_urls:
-    - "https://fonts.googleapis.com/css?family=Montserrat:400,700"
-    - "https://fonts.googleapis.com/css?family=Kaushan+Script"
-    - "https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic"
-    - "https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700"
-
-# Set custom fonts
-fonts:
-  - name: "Montserrat"
-    for: "heading"
-  - name: "Wuinbold"
-    for: "script"
-  - name: "Droid Serif"
-    for: "serif"
-  - name: "Roboto Slab"
-    for: "body"
+  - "https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap"
+  - "https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic&display=swap"
+  - "https://fonts.googleapis.com/css?family=Roboto+Slab:300,400,700&display=swap"

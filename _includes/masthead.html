@@ -1,0 +1,18 @@
+{%- assign text = site.data.sitetext[site.locale] | default: site.data.sitetext -%}
+<!-- Header -->
+<header class="masthead">
+  <div class="container">
+    <div class="intro-text">
+      {%- if text.header.title %}
+      <div class="intro-lead-in">{{ text.header.title }}</div>
+      {%- endif %}
+      {%- if text.header.text %}
+      <div class="intro-heading text-uppercase">{{ text.header.text }}</div>
+      {%- endif %}
+      {%- if text.header.button %}
+      <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="{{ text.header.buttonlink }}">{{ text.header.button }}</a>
+      {%- endif %}
+    </div>
+  </div>
+</header>
+<!-- End Header -->

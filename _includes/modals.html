@@ -1,41 +1,25 @@
+{%- assign text = site.data.sitetext[site.locale] | default: site.data.sitetext -%}
 <!-- Portfolio Modals -->
-{% for project in site.portfolio %}
-{% if site.locale and site.locale != "" and site.locale != nil %}
-<div
-  class="portfolio-modal modal fade"
-  id="p{{ forloop.index }}"
-  tabindex="-1"
-  role="dialog"
-  aria-hidden="true"
->
+{%- for project in site.portfolio %}
+<div class="portfolio-modal modal fade" id="p{{ forloop.index }}" tabindex="-1" role="dialog" aria-labelledby="p{{ forloop.index }}-title" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="close-modal" data-dismiss="modal">
-        <div class="lr">
-          <div class="rl"></div>
-        </div>
-      </div>
+      <button class="close-modal" type="button" data-dismiss="modal" aria-label="{{ text.portfolio.closebutton | default: "Close" }}">
+        <span class="lr"><span class="rl"></span></span>
+      </button>
       <div class="container">
         <div class="row">
           <div class="col-lg-8 mx-auto">
             <div class="modal-body">
-              <!-- Project Details Go Here -->
-              <h2 class="text-uppercase">{{ project.title }}</h2>
+              <h2 class="text-uppercase" id="p{{ forloop.index }}-title">{{ project.title }}</h2>
               <p class="item-intro text-muted">{{ project.subtitle }}</p>
-              <img
-                class="img-fluid d-block mx-auto"
-                src="{{ project.image }}"
-                alt="{{ project.alt }}"
-              />
-              <p>{{ project.content }}</p>
-              <button
-                class="btn btn-primary"
-                data-dismiss="modal"
-                type="button"
-              >
+              {%- if project.image %}
+              <img class="img-fluid d-block mx-auto" src="{{ project.image | relative_url }}" alt="{{ project.alt | default: project.title }}" loading="lazy">
+              {%- endif %}
+              <div class="modal-text">{{ project.content }}</div>
+              <button class="btn btn-primary" data-dismiss="modal" type="button">
                 <i class="fas fa-times"></i>
-                {{ site.data.sitetext[site.locale].portfolio.closebutton |
-                default: "Close Project" }}
+                {{ text.portfolio.closebutton | default: "Close Project" }}
               </button>
             </div>
           </div>
@@ -44,50 +28,5 @@
     </div>
   </div>
 </div>
-{% else %}
-<div
-  class="portfolio-modal modal fade"
-  id="p{{ forloop.index }}"
-  tabindex="-1"
-  role="dialog"
-  aria-hidden="true"
->
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="close-modal" data-dismiss="modal">
-        <div class="lr">
-          <div class="rl"></div>
-        </div>
-      </div>
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8 mx-auto">
-            <div class="modal-body">
-              <!-- Project Details Go Here -->
-              <h2 class="text-uppercase">{{ project.title }}</h2>
-              <p class="item-intro text-muted">{{ project.subtitle }}</p>
-              <img
-                class="img-fluid d-block mx-auto"
-                src="{{ project.image }}"
-                alt="{{ project.alt }}"
-              />
-              <p>{{ project.content }}</p>
-              <button
-                class="btn btn-primary"
-                data-dismiss="modal"
-                type="button"
-              >
-                <i class="fas fa-times"></i>
-                {{ site.data.sitetext.portfolio.closebutton |
-                default: "Close Project" }}
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-{% endif %}
-{% endfor %}
+{%- endfor %}
 <!-- End Portfolio Modals -->

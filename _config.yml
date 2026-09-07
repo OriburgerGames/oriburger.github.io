@@ -1,39 +1,46 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely edit after that.
-# This file is *NOT* reloaded automatically when you use 'bundle exec jekyll serve'.
-# If you change this file, please restart the server process.
-
 # Site settings
-# are used to personalize your new site. If you look in the HTML files,
-# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
-# You can create any custom variable you would like, and they will be accessible
-# in the templates via {{ site.myvariable }}.
+# 값들은 템플릿에서 {{ site.title }}, {{ site.email }} 등으로 사용된다.
+# 이 파일은 `jekyll serve` 중 자동 반영되지 않으므로 수정 후 서버를 재시작할 것.
 
-#theme: jekyll-agency
+# 사이트는 커스텀 도메인 루트(https://oriburgergames.com/)에서 서비스되므로 baseurl은 빈 문자열이어야 한다.
+# 하위 경로(예: https://user.github.io/repo/)로 배포할 때만 "/repo" 형태로 지정한다.
+# 템플릿의 모든 에셋 경로는 `relative_url` 필터를 거치므로 이 값만 바꾸면 전체가 따라간다.
+url    : "https://oriburgergames.com"
+baseurl: ""
 
-url    : "https://oriburger.github.io" # the base hostname & protocol for your site, e.g. http://example.com
-baseurl: "/oriburger.github.io" # the subpath of your site, e.g. /blog
-
-title      : OriburgerGames
-email      : teambackstreetforever@gmail.com #this is also the email contact forms will go to
+title      : Oriburger Games
+email      : teambackstreetforever@gmail.com # 문의 폼(Formspree) 수신 주소
 description: "For the best action game, Oriburger Games"
-author     : OriburgerGames
-# logo:     #optional, defaults to site title
-  # path: assets\img\clients\creative-market.jpg
-  # height: 60 #height in px, defaults to 52px
+author     : Oriburger Games
+og_image   : /assets/img/timeline/2.jpg # SNS 공유 썸네일 (og:image)
+# logo:     # 지정하면 내비게이션의 사이트 제목 대신 로고 이미지를 사용
+  # path: /assets/img/logo.png
+  # height: 60
 
-locale: "en-US" # See available languages in _data/sitetext.yml
+# _data/sitetext.yml, _data/navigation.yml 의 최상위 키와 일치해야 한다.
+locale: "en"
 
 analytics:
-  google: #Google Analytics tracking code here
+  google: # Google Analytics 측정 ID (예: G-XXXXXXX). 비워두면 비활성화
 
 collections:
   portfolio:
+    output: false # 수상 내역은 메인 페이지의 모달로만 노출
 
 markdown: kramdown
 
-# Uncomment following line to use Formspree form ID based URL instead of email based URL
-# Details: https://help.formspree.io/hc/en-us/articles/360017735154-How-to-prevent-spam
+# Formspree 폼 ID 기반 URL을 쓰려면 주석 해제 (이메일 기반 URL은 Formspree에서 단계적 폐지 중)
+# https://help.formspree.io/hc/en-us/articles/360017735154-How-to-prevent-spam
 # formspree_form_path: "f/a_form_id"
+
+exclude:
+  - claude
+  - scripts
+  - node_modules
+  - package.json
+  - package-lock.json
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - LICENSE.txt
+  - .check

@@ -1,0 +1,33 @@
+// Styling for the clients / partners section
+#clients {
+  .client-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+    padding: 12px 16px;
+    border-radius: 10px;
+    // 다크 테마에서는 흰 배경의 로고 이미지가 도드라지지 않도록 밝은 카드 위에 올린다.
+    background-color: var(--logo-bg);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+}
+
+// horizontal-scrolling: "yes" 일 때
+#scrolling-clients {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  > div {
+    flex: 0 0 auto;
+  }
+}

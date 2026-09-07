@@ -1,30 +1,28 @@
+// Fonts
+// 웹폰트 로딩 URL은 _data/style.yml (fonts_urls) 에 있다.
+
 @font-face {
-  font-family: 'Wuinbold';
-  src: url('../../assets/fonts/Wuinbold.otf') format('opentype'),
-       url('../../assets/fonts/Wuinbold.ttf') format('truetype');
+  font-family: "Wuinbold";
+  src: url("../fonts/Wuinbold.otf") format("opentype"),
+       url("../fonts/Wuinbold.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
-// Font Mixins
-@mixin serif-font {
-  font-family: "Droid Serif", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+$system-font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+  "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+  "Segoe UI Symbol", "Noto Color Emoji";
+
+@mixin heading-font {
+  font-family: "Montserrat", $system-font-stack;
 }
 @mixin script-font {
-  font-family: "Wuinbold", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: "Wuinbold", $system-font-stack;
+}
+@mixin serif-font {
+  font-family: "Droid Serif", $system-font-stack;
 }
 @mixin body-font {
-  font-family: /*'Roboto Slab',*/ -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: "Roboto Slab", $system-font-stack;
 }
-@mixin heading-font {
-  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-}
-

@@ -1,30 +1,17 @@
-<!-- Clients -->
-{% if site.locale and site.locale != "" and site.locale != nil %}
-  <section class="py-5" id="{{ site.data.sitetext[site.locale].clients.section | default: "clients" }}">
-    <div class="container">
-      <div class="row justify-content-center" {% if site.data.sitetext[site.locale].clients.horizontal-scrolling == "yes" %} id="scrolling-clients" {% endif %}>
-        {% for client in site.data.sitetext[site.locale].clients.list %}
-        <div class="col-md-3 col-sm-6">
-          <a href="{{ client.url }}">
-            <img class="img-fluid d-block mx-auto" src="{{ client.logo }}" alt="{{ client.title }}" style="max-height: {{ site.data.sitetext[site.locale].clients.max-height | default: "100px" }}">
-          </a>
-        </div>
-        {% endfor %}
+{%- assign text = site.data.sitetext[site.locale] | default: site.data.sitetext -%}
+{%- assign clients = text.clients -%}
+<!-- Clients / Partners -->
+<section class="py-5" id="{{ clients.section | default: "clients" }}">
+  <div class="container">
+    <div class="row justify-content-center align-items-center"{% if clients.horizontal-scrolling == "yes" %} id="scrolling-clients"{% endif %}>
+      {%- for client in clients.list %}
+      <div class="col-6 col-md-3 reveal" style="--reveal-delay: {{ forloop.index0 | times: 100 }}ms">
+        <a class="client-logo" href="{{ client.url }}" target="_blank" rel="noopener" title="{{ client.title }}">
+          <img class="img-fluid" src="{{ client.logo | relative_url }}" alt="{{ client.title }}" loading="lazy" style="max-height: {{ clients.max-height | default: "100px" }}">
+        </a>
       </div>
+      {%- endfor %}
     </div>
-  </section>
-{% else %}
-  <section class="py-5" id="{{ site.data.sitetext.clients.section | default: "clients" }}">
-    <div class="container">
-      <div class="row justify-content-center" {% if site.data.sitetext.clients.horizontal-scrolling == "yes" %} id="scrolling-clients" {% endif %}>
-        {% for client in site.data.sitetext.clients.list %}
-        <div class="col-md-3 col-sm-6">
-          <a href="{{ client.url }}">
-            <img class="img-fluid d-block mx-auto" src="{{ client.logo }}" alt="{{ client.title }}" style="max-height: {{ site.data.sitetext.clients.max-height | default: "100px" }}">
-          </a>
-        </div>
-        {% endfor %}
-      </div>
-    </div>
-  </section>
-{% endif %}
+  </div>
+</section>
+<!-- End Clients -->

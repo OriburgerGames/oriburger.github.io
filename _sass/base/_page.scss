@@ -1,7 +1,15 @@
-// Global styling for this template
+// Global styling
 body {
   overflow-x: hidden;
+  // 내용이 짧은 페이지(404, legal)에서도 푸터를 바닥에 붙인다.
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   @include body-font;
+}
+
+.footer {
+  margin-top: auto;
 }
 
 p {
@@ -45,9 +53,32 @@ h6 {
     @include serif-font;
   }
 }
+@media (max-width: 575.98px) {
+  .page-section {
+    padding: 80px 0;
+    h2.section-heading {
+      font-size: 30px;
+    }
+  }
+}
 @media (min-width: 768px) {
   section {
     padding: 150px 0;
+  }
+}
+
+.lead-text {
+  font-size: 1.05rem;
+}
+
+// page 레이아웃 (404, legal): 고정 내비게이션 높이만큼 여백
+#pagecontainer {
+  padding-top: 150px;
+  padding-bottom: 60px;
+}
+@media (max-width: 991.98px) {
+  #pagecontainer {
+    padding-top: 100px;
   }
 }
 
@@ -56,16 +87,13 @@ h6 {
   background: $primary;
   text-shadow: none;
 }
-
 ::selection {
   background: $primary;
   text-shadow: none;
 }
-
 img::selection {
   background: transparent;
 }
-
 img::-moz-selection {
   background: transparent;
 }

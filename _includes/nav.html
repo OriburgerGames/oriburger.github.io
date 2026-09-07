@@ -1,68 +1,39 @@
+{%- assign nav = site.data.navigation[site.locale] | default: site.data.navigation -%}
+{%- comment -%}
+메인 페이지에서는 "#section" 형태의 해시만 사용해야 Bootstrap scrollspy가 현재 섹션을 추적한다.
+다른 페이지에서는 메인 페이지 경로를 앞에 붙인다.
+{%- endcomment -%}
+{%- assign prefix = "" -%}
+{%- if page.layout != "home" -%}{%- assign prefix = "/" | relative_url -%}{%- endif -%}
 <!-- Navigation -->
-<nav
-  class="navbar navbar-expand-lg navbar-dark fixed-top"
-  id="mainNav"
-  style="background-color: #212529"
->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top{% if page.layout != "home" %} navbar-solid{% endif %}" id="mainNav">
   <div class="container">
-    <a class="navbar-brand js-scroll-trigger" href="{{ site.baseurl }}/#">
+    <a class="navbar-brand js-scroll-trigger" href="{{ prefix }}#page-top">
       {%- if site.logo -%}
-      <img
-        height="{{ site.logo.height | default: 52 }}"
-        src="{{ site.logo.path }}"
-      />
-      {%- else -%} {{ site.title }} {%- endif -%}
+      <img height="{{ site.logo.height | default: 52 }}" src="{{ site.logo.path | relative_url }}" alt="{{ site.title }}">
+      {%- else -%}
+      {{ site.title }}
+      {%- endif -%}
     </a>
-    <button
-      class="navbar-toggler navbar-toggler-right"
-      type="button"
-      data-toggle="collapse"
-      data-target="#navbarResponsive"
-      aria-controls="navbarResponsive"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      Menu<i class="fas fa-bars"></i>
+    <button class="theme-toggle ml-auto" type="button" data-theme-toggle aria-label="Toggle dark mode" title="Toggle dark mode">
+      <i class="fas fa-moon" aria-hidden="true"></i>
+      <i class="fas fa-sun" aria-hidden="true"></i>
+    </button>
+    <button class="navbar-toggler ml-2" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      Menu
+      <i class="fas fa-bars"></i>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav text-uppercase ml-auto">
-      {% if site.locale and site.locale != "" and site.locale != nil %}
-        {%- for link in site.data.navigation[site.locale].nav -%}
+        {%- for link in nav.nav %}
         <li class="nav-item">
-          {%- if link.url -%}
-          <a class="nav-link js-scroll-trigger" href="{{ link.url }}"
-            >{{ link.title }}</a
-          >
-          {%- elsif link.section -%}
-          <a
-            class="nav-link js-scroll-trigger"
-            href="{{ site.baseurl }}/#{{ link.section }}"
-            >{{ link.title }}</a
-          >
-          {%- else -%}
-          <a class="nav-link js-scroll-trigger" href="#">{{ link.title }}</a>
-          {%- endif -%}
+          {%- if link.url %}
+          <a class="nav-link" href="{{ link.url }}" target="_blank" rel="noopener">{{ link.title }}</a>
+          {%- elsif link.section %}
+          <a class="nav-link js-scroll-trigger" href="{{ prefix }}#{{ link.section }}">{{ link.title }}</a>
+          {%- endif %}
         </li>
-        {%- endfor -%}
-      {% else %}
-        {%- for link in site.data.navigation.nav -%}
-        <li class="nav-item">
-          {%- if link.url -%}
-          <a class="nav-link js-scroll-trigger" href="{{ link.url }}"
-            >{{ link.title }}</a
-          >
-          {%- elsif link.section -%}
-          <a
-            class="nav-link js-scroll-trigger"
-            href="{{ site.baseurl }}/#{{ link.section }}"
-            >{{ link.title }}</a
-          >
-          {%- else -%}
-          <a class="nav-link js-scroll-trigger" href="#">{{ link.title }}</a>
-          {%- endif -%}
-        </li>
-        {%- endfor -%}
-      {% endif %}
+        {%- endfor %}
       </ul>
     </div>
   </div>

@@ -1,0 +1,83 @@
+// Light / dark theme tokens
+//
+// 기본은 라이트. 시스템이 다크를 선호하면 자동으로 다크가 되고,
+// 사용자가 토글을 누르면 <html data-theme="light|dark"> 가 붙어 시스템 설정보다 우선한다.
+// (초기 적용 스크립트는 _includes/head.html, 토글 동작은 assets/js/agency.js)
+
+:root {
+  --bg: #{$white};
+  --bg-alt: #{$gray-100};
+  --surface: #{$white};
+  --text: #{$gray-900};
+  --text-muted: #6c757d;
+  --border: #{$gray-300};
+  --line: #{$gray-200};
+  --input-bg: #{$white};
+  --nav-bg: #{$gray-900};
+  --social-bg: #{$gray-900};
+  --logo-bg: transparent;
+  --shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+  color-scheme: light;
+}
+
+@mixin dark-tokens {
+  --bg: #121518;
+  --bg-alt: #1a1e23;
+  --surface: #22272e;
+  --text: #e6e8eb;
+  --text-muted: #a9b0b8;
+  --border: #3a4149;
+  --line: #2f363d;
+  --input-bg: #22272e;
+  --nav-bg: #0d1013;
+  --social-bg: #3a4149;
+  --logo-bg: #{$white};
+  --shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    @include dark-tokens;
+  }
+}
+:root[data-theme="dark"] {
+  @include dark-tokens;
+}
+
+// Bootstrap 유틸리티/컴포넌트를 토큰에 연결
+body {
+  background-color: var(--bg);
+  color: var(--text);
+}
+.bg-light {
+  background-color: var(--bg-alt) !important;
+}
+.text-muted {
+  color: var(--text-muted) !important;
+}
+.modal-content {
+  background-color: var(--surface);
+  color: var(--text);
+  border: 0;
+}
+.form-control {
+  background-color: var(--input-bg);
+  color: var(--text);
+  border-color: var(--border);
+  &:focus {
+    background-color: var(--input-bg);
+    color: var(--text);
+  }
+}
+hr {
+  border-color: var(--border);
+}
+
+body,
+.bg-light,
+.modal-content,
+.form-control,
+.footer {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}

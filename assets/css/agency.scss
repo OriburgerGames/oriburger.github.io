@@ -1,43 +1,33 @@
 ---
 ---
 @charset "utf-8";
-// Core variables and mixins
-@import "base/variables.scss";
-@import "base/mixins.scss";
+// 이 파일은 Jekyll이 Liquid를 먼저 처리한 뒤 Sass로 컴파일한다.
+// 색상/이미지 값은 _data/style.yml 에서 온다.
 
-// Custom Fonts
-{% if site.data.style.fonts %}
-  {% for font in site.data.style.fonts %}
-    @mixin {{font.for}}-font {
-      font-family: "{{ font.name }}", -apple-system, BlinkMacSystemFont, "Segoe UI",
-      Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji",
-      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    }
-  {% endfor %}
-{% endif %}
+@import "base/variables";
+@import "base/mixins";
 
-// Custom colors
-$primary: {{ site.data.style.highlight | default: "#fed136" }} !default;
-$white: {{ site.data.style.white | default: "#fff" }} !default;
-$black: {{ site.data.style.black | default: "#000" }} !default;
+$primary: {{ site.data.style.highlight | default: "#fed136" }};
+$white: #fff;
+$black: #000;
+$header-image: "{{ site.data.style.header-image | default: '../img/header.png' }}";
+$contact-image: "{{ site.data.style.contact-image | default: '../img/contact.png' }}";
 
-// Custom Images
-$header-image: "{{ site.data.style.header-image }}";
-$contact-image: "{{ site.data.style.contact-image }}";
-
-// Global CSS
-@import "base/page.scss";
+// Global
+@import "base/theme";
+@import "base/page";
+@import "base/animations";
 
 // Components
-@import "components/buttons.scss";
-@import "components/navbar.scss";
-@import "components/client-scroll.scss";
+@import "components/buttons";
+@import "components/navbar";
 
 // Layout
-@import "layout/masthead.scss";
-@import "layout/services.scss";
-@import "layout/portfolio.scss";
-@import "layout/timeline.scss";
-@import "layout/team.scss";
-@import "layout/contact.scss";
-@import "layout/footer.scss";
+@import "layout/masthead";
+@import "layout/services";
+@import "layout/portfolio";
+@import "layout/timeline";
+@import "layout/team";
+@import "layout/clients";
+@import "layout/contact";
+@import "layout/footer";

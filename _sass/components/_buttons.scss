@@ -2,6 +2,7 @@
 .btn {
   @include heading-font;
   font-weight: 700;
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .btn-xl {
@@ -19,8 +20,12 @@
     border-color: darken($primary, 7.5%) !important;
     color: white;
   }
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba($primary, 0.35);
+  }
   &:active,
   &:focus {
-    box-shadow: 0 0 0 0.2rem rgba(254, 209, 55, 0.5) !important;
+    box-shadow: 0 0 0 0.2rem rgba($primary, 0.5) !important;
   }
 }

@@ -2,10 +2,35 @@
 .team-member {
   margin-bottom: 50px;
   text-align: center;
+  img,
+  .team-avatar {
+    width: 100%;
+    max-width: 225px;
+    height: auto;
+    aspect-ratio: 1;
+    border: 7px solid var(--line);
+    transition: transform 0.35s ease, border-color 0.35s ease;
+  }
   img {
-    width: 225px;
-    height: 225px;
-    border: 7px solid fade-out($black, 0.9);
+    object-fit: cover;
+  }
+  // 사진이 없는 팀원은 이름 이니셜을 표시
+  .team-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $primary;
+    color: white;
+    font-size: 56px;
+    font-weight: 700;
+    @include heading-font;
+  }
+  &:hover {
+    img,
+    .team-avatar {
+      transform: scale(1.05);
+      border-color: $primary;
+    }
   }
   h4 {
     margin-top: 25px;
@@ -14,5 +39,20 @@
   }
   p {
     margin-top: 0;
+  }
+}
+@media (max-width: 575.98px) {
+  .team-member {
+    margin-bottom: 30px;
+    .team-avatar {
+      font-size: 36px;
+    }
+    h4 {
+      margin-top: 15px;
+      font-size: 1rem;
+    }
+    p {
+      font-size: 0.9rem;
+    }
   }
 }
